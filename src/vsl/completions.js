@@ -3,6 +3,7 @@ import { config } from "../../config.js";
 import {
     generateVideoScriptQuery,
     exampleVslOne,
+    exampleVslThree,
 } from "./vslTranscriptHelpers.js";
 
 const { open_ai } = config;
@@ -19,13 +20,19 @@ const instance = axios.create({
 instance
     .post(open_ai.endpoints.completions, {
         model: open_ai.model_instruct,
-        prompt: generateVideoScriptQuery(exampleVslOne),
-        max_tokens: 500,
+        prompt: generateVideoScriptQuery(exampleVslThree),
+        max_tokens: 4000,
         temperature: open_ai.temperature,
     })
     .then((res) => {
         console.log(res.data);
-        console.log(res.data.choices[0]);
+        // console.log(res.data.choices[0]);
+        res.data.choices.forEach((c, i) => {
+            console.log(res.data.choices[i]);
+            const words = res.data.choices[i].message.content.split(" ");
+            console.log("Word count: ", words.length);
+            // console.log("words: ", words);
+        });
     })
     .catch((err) => {
         const { response: res } = err;

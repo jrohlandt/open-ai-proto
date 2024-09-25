@@ -37,12 +37,16 @@ export const exampleVslTwo = {
 };
 
 export const exampleVslThree = {
-    goal: "To write a video sales letter on for a revolutionary car engine cleaning liquid named SupaClean.",
+    goal: "To write a video sales letter on for a revolutionary car shampoo named SupaClean.",
     primaryAudience: "People with old cars",
     secondaryAudience: "Hobbyist car builders",
     points: [
-        "Why a clean car engine is important",
+        "Why a clean car is important",
         "How easy it is to use SupaClean",
+        "The cost of taking car to car wash compared to SupaClean",
+        "The neighbours will be jealous of your shiny car.",
+        "The ladies will love your shiny car.",
+        "But be weary of law enforcement they like to give tickets if your car is better than theirs.",
     ],
     keyMessage: "string",
     compellingScript: "string",
@@ -67,7 +71,8 @@ export function generateVideoScriptQuery(script) {
     } = script;
     let scriptText = `I would like you write an engaging video sales letter script based on the following details I provide: 
 The primary goal of this video is to ${goal};
-The script should be no longer than ${length} and have a tonality of ${tonality};
+The video sales letter should have a word count of ${length} words. 
+The tonality of the script should be ${tonality};
 The primary audience we are targeting is ${primaryAudience};
 `;
 
@@ -102,5 +107,11 @@ The primary audience we are targeting is ${primaryAudience};
     scriptText +=
         "\n\nMake sure to not include any scene descriptions and make sure you only provide the raw video sales letter script with nothing else.";
 
+    scriptText += `
+    After every paragraph print the number of words in that paragraph.
+    At the end of the video sales letter print the total number of words in the script.
+    At the end of the video sales letter also print how many words I asked you to generate.
+    If you generated less words than I asked for please tell me why.
+    `;
     return scriptText;
 }
